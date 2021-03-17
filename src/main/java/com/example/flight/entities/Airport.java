@@ -16,12 +16,12 @@ import javax.persistence.Id;
 public class Airport {
 
     private @Id @GeneratedValue Long id;
-    private String _airportCode;
-    private String _name;
+    private String airportCode;
+    private String name;
 
 
     public Airport(String airportCode, String name) {
-        _airportCode = airportCode;
-        _name = name;
+        this.airportCode = airportCode;
+        this.name = name;
     }
 }

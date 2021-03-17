@@ -22,45 +22,37 @@ class AirportController {
         this.repository = repository;
     }
 
-    @GetMapping("/test")
-    public String hello(){
-        return "hello world";
-    }
-
     @GetMapping("/airports")
-    public List<Airport> all() {
+    public List<Airport> getAllAirports() {
         return repository.findAll();
     }
 
     @PostMapping("/airports")
-    public Airport newEmployee(@RequestBody Airport newAirport) {
+    public Airport postAirport(@RequestBody Airport newAirport) {
         return repository.save(newAirport);
     }
 
     @GetMapping("/airports/{id}")
-    public Airport one(@PathVariable Long id) {
+    public Airport getAirportById(@PathVariable Long id) {
 
         return repository.findById(id)
                 .orElseThrow(() -> new AirportNotFoundException(id));
     }
 
     @PutMapping("/airports/{id}")
-    public Airport replaceEmployee(@RequestBody Airport newEmployee, @PathVariable Long id) {
+    public Airport putAirport(@RequestBody Airport newAirport, @PathVariable Long id) {
 
         return repository.findById(id)
-                .map(employee -> {
-                    employee.set_name(newEmployee.get_name());
-                    employee.set_airportCode(newEmployee.get_airportCode());
-                    return repository.save(employee);
+                .map(airports -> {
+                    airports.setName(newAirport.getName());
+                    airports.setAirportCode(newAirport.getAirportCode());
+                    return repository.save(airports);
                 })
-                .orElseGet(() -> {
-                    newEmployee.setId(id);
-                    return repository.save(newEmployee);
-                });
+                .orElseThrow(() -> new AirportNotFoundException(id));
     }
 
     @DeleteMapping("/airports/{id}")
-    public void deleteEmployee(@PathVariable Long id) {
+    public void deleteAirport(@PathVariable Long id) {
         repository.deleteById(id);
     }
 }
