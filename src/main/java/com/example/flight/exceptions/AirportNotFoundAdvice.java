@@ -1,4 +1,4 @@
-package com.example.flight;
+package com.example.flight.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

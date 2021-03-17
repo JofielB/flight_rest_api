@@ -1,4 +1,4 @@
-package com.example.flight;
+package com.example.flight.entities;
 
 import lombok.*;
 

@@ -1,5 +1,7 @@
 package com.example.flight;
 
+import com.example.flight.entities.Airport;
+import com.example.flight.repositories.AirportRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -15,8 +17,8 @@ class LoadDatabase {
     CommandLineRunner initDatabase(AirportRepository repository) {
 
         return args -> {
-            log.info("Preloading... " + repository.save(new Airport("111A", "burglar")));
-            log.info("Preloading... " + repository.save(new Airport("222B", "thief")));
+            log.info("Preloading... " + repository.save(new Airport("111A", "Hululu")));
+            log.info("Preloading... " + repository.save(new Airport("222B", "Ulau")));
         };
     }
 }
