@@ -4,55 +4,43 @@ import java.util.List;
 
 import com.example.flight.entities.Airport;
 import com.example.flight.exceptions.AirportNotFoundException;
-import com.example.flight.repositories.AirportRepository;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.flight.services.AirportService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/airports")
 class AirportController {
 
-    private final AirportRepository repository;
+    private final AirportService service;
 
-    private AirportController(AirportRepository repository) {
-        this.repository = repository;
+    @Autowired
+    private AirportController(AirportService service) {
+        this.service = service;
     }
 
-    @GetMapping("/airports")
+    @GetMapping
     public List<Airport> getAllAirports() {
-        return repository.findAll();
+        return service.getAllAirports();
     }
 
-    @PostMapping("/airports")
-    public Airport postAirport(@RequestBody Airport newAirport) {
-        return repository.save(newAirport);
+    @PostMapping
+    public Airport postAirport(@RequestBody Airport airport) {
+        return service.createAirport(airport);
     }
 
-    @GetMapping("/airports/{id}")
+    @GetMapping("/{id}")
     public Airport getAirportById(@PathVariable Long id) {
-
-        return repository.findById(id)
-                .orElseThrow(() -> new AirportNotFoundException(id));
+        return service.getAirportById(id);
     }
 
-    @PutMapping("/airports/{id}")
-    public Airport putAirport(@RequestBody Airport newAirport, @PathVariable Long id) {
-
-        return repository.findById(id)
-                .map(airports -> {
-                    airports.setName(newAirport.getName());
-                    airports.setAirportCode(newAirport.getAirportCode());
-                    return repository.save(airports);
-                })
-                .orElseThrow(() -> new AirportNotFoundException(id));
+    @PutMapping("/{id}")
+    public Airport putAirport(@RequestBody Airport airport, @PathVariable Long id) {
+        return service.updateAirport(airport, id);
     }
 
-    @DeleteMapping("/airports/{id}")
+    @DeleteMapping("/{id}")
     public void deleteAirport(@PathVariable Long id) {
-        repository.deleteById(id);
+        service.deleteAirport(id);
     }
 }
