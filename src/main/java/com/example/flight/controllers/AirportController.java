@@ -24,6 +24,7 @@ class AirportController {
         return service.getAllAirports();
     }
 
+    //Todo add authentication to this route
     @PostMapping
     public Airport createAirport(@RequestBody Airport airport) {
         return service.createAirport(airport);
