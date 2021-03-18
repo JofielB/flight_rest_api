@@ -2,9 +2,7 @@ package com.example.flight.entities;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @NoArgsConstructor
@@ -13,6 +11,7 @@ import javax.persistence.Id;
 @EqualsAndHashCode
 @ToString
 @Entity
+@Table
 public class Airport {
 
     private @Id @GeneratedValue Long id;
