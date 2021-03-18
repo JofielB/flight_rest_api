@@ -25,7 +25,7 @@ class AirportController {
     }
 
     @PostMapping
-    public Airport postAirport(@RequestBody Airport airport) {
+    public Airport createAirport(@RequestBody Airport airport) {
         return service.createAirport(airport);
     }
 
@@ -35,7 +35,7 @@ class AirportController {
     }
 
     @PutMapping("/{id}")
-    public Airport putAirport(@RequestBody Airport airport, @PathVariable Long id) {
+    public Airport updateAirport(@RequestBody Airport airport, @PathVariable Long id) {
         return service.updateAirport(airport, id);
     }
 
