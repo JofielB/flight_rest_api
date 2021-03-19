@@ -33,10 +33,10 @@ public class FlightController {
         return service.getFlightById(id);
     }
 
-//    @PutMapping("{id}")
-//    public Flight updateFlight(@RequestBody Flight flight, @PathVariable Long id) {
-//        return service.updateFlight(flight, id);
-//    }
+    @PutMapping("{id}")
+    public Flight updateFlight(@RequestBody Flight flight, @PathVariable Long id) {
+        return service.updateFlight(flight, id);
+    }
 
     @DeleteMapping("{id}")
     public void deleteFlight(@PathVariable Long id) {

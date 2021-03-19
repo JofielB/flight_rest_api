@@ -18,9 +18,4 @@ public class Flight {
     @Column(name = "available")
     private boolean isAvailable;
 
-
-//    @ManyToOne
-//    @JoinColumn(name = "airport_code", nullable = false)
-//    private  Airport airport;
-
 }
