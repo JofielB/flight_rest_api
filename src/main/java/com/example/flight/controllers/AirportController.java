@@ -3,7 +3,6 @@ package com.example.flight.controllers;
 import java.util.List;
 
 import com.example.flight.entities.Airport;
-import com.example.flight.exceptions.AirportNotFoundException;
 import com.example.flight.services.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
