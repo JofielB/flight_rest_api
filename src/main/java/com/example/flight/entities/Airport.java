@@ -1,10 +1,11 @@
 package com.example.flight.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Set;
-
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -22,6 +23,10 @@ public class Airport {
 
     @Column(name = "name")
     private String name;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "airport", cascade = CascadeType.ALL)
+    private List<Flight> flights = new ArrayList<>();
 
     public Airport(String airportCode, String name) {
         this.airportCode = airportCode;
