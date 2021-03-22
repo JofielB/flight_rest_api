@@ -22,7 +22,7 @@ public class Flight {
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "airport_id")
+    @JoinColumn(name = "airport_id", nullable = false)
     private Airport airport;
 
     public Flight(boolean isAvailable, Airport airport) {

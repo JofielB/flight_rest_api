@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FlightService {
@@ -44,5 +45,22 @@ public class FlightService {
         if (getFlightById(id) != null) {
             repository.deleteById(id);
         }
+    }
+
+    public List<Flight> getAirportFlightsById(Long id, boolean available) {
+        if (available) {
+            return getAvailableFlightsByAirportId(id);
+        } else {
+            return getFlightsByAirportId(id);
+        }
+    }
+    private List<Flight> getFlightsByAirportId(Long airportId) {
+        return repository.findFlightsByAirportId(airportId);
+    }
+
+    private List<Flight> getAvailableFlightsByAirportId(Long airportId) {
+        return getFlightsByAirportId(airportId)
+                .stream().filter(Flight::isAvailable)
+                .collect(Collectors.toList());
     }
 }

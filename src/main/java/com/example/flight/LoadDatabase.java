@@ -29,7 +29,6 @@ class LoadDatabase {
             log.info("Preloading... " + flightRepository.save(flightA));
             log.info("Preloading... " + flightRepository.save(flightAA));
             log.info("Preloading... " + flightRepository.save(flightB));
-
         };
     }
 }
