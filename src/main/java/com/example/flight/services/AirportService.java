@@ -1,8 +1,10 @@
 package com.example.flight.services;
 
 import com.example.flight.entities.Airport;
+import com.example.flight.exceptions.AirportCodeAlreadyExistException;
 import com.example.flight.exceptions.AirportNotFoundException;
 import com.example.flight.repositories.AirportRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +14,7 @@ public class AirportService {
 
     private final AirportRepository repository;
 
+    @Autowired
     private AirportService(AirportRepository repository) {
         this.repository = repository;
     }
@@ -21,6 +24,10 @@ public class AirportService {
     }
 
     public Airport createAirport(Airport airport) {
+        Airport airportByCode = repository.findAirportByCode(airport.getAirportCode());
+        if (airportByCode != null) {
+            throw new AirportCodeAlreadyExistException(airport.getAirportCode());
+        }
         return repository.save(airport);
     }
 
