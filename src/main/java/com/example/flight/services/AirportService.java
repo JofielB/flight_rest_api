@@ -1,11 +1,13 @@
 package com.example.flight.services;
 
+import com.example.flight.Data;
 import com.example.flight.entities.Airport;
 import com.example.flight.exceptions.AirportCodeAlreadyExistException;
 import com.example.flight.exceptions.AirportNotFoundException;
 import com.example.flight.repositories.AirportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -13,6 +15,8 @@ import java.util.List;
 public class AirportService {
 
     private final AirportRepository repository;
+    @Autowired
+    private RestTemplate restTemplate;
 
     @Autowired
     private AirportService(AirportRepository repository) {
@@ -51,4 +55,12 @@ public class AirportService {
             repository.deleteById(id);
         }
     }
+
+    //The service below is for pure testing
+
+    public Data getAirportsTest(String searchParam) {
+        String url = "https://api.flightapi.io/iata/605a775c5ebe270566374988/" + searchParam + "/airport";
+        return restTemplate.getForObject(url, Data.class);
+    }
+
 }

@@ -2,6 +2,7 @@ package com.example.flight.controllers;
 
 import java.util.List;
 
+import com.example.flight.Data;
 import com.example.flight.entities.Airport;
 import com.example.flight.entities.Flight;
 import com.example.flight.services.AirportService;
@@ -67,5 +68,12 @@ class AirportController {
     @DeleteMapping("/flights/{id}")
     public void deleteFlight(@PathVariable Long id) {
         flightService.deleteFlight(id);
+    }
+
+    //The endpoint below is for pure testing
+
+    @GetMapping("/test/{searchParam}")
+    public Data getAirportsByNameTest(@PathVariable String searchParam) {
+        return airportService.getAirportsTest(searchParam);
     }
 }
