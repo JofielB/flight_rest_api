@@ -1,4 +1,4 @@
-package com.example.flight;
+package com.example.flight.domains;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.NoArgsConstructor;
@@ -6,8 +6,6 @@ import lombok.NoArgsConstructor;
 @lombok.Data
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AirportTest {
-    private String iata;
-    private String fs;
-    private String name;
+public class Data {
+    private Airport[] data;
 }

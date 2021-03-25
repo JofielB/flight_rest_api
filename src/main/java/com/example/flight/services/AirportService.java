@@ -1,6 +1,6 @@
 package com.example.flight.services;
 
-import com.example.flight.Data;
+import com.example.flight.domains.Data;
 import com.example.flight.entities.Airport;
 import com.example.flight.exceptions.AirportCodeAlreadyExistException;
 import com.example.flight.exceptions.AirportNotFoundException;
@@ -56,9 +56,7 @@ public class AirportService {
         }
     }
 
-    //The service below is for pure testing
-
-    public Data getAirportsTest(String searchParam) {
+    public Data getAirportsByParam(String searchParam) {
         String url = "https://api.flightapi.io/iata/605a775c5ebe270566374988/" + searchParam + "/airport";
         return restTemplate.getForObject(url, Data.class);
     }
