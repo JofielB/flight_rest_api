@@ -7,6 +7,8 @@ import com.example.flight.entities.Airport;
 import com.example.flight.entities.Flight;
 import com.example.flight.services.AirportService;
 import com.example.flight.services.FlightService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -71,7 +73,12 @@ class AirportController {
     }
 
     @GetMapping("/flightAPI/{searchParam}")
-    public Data getAirportsByNameTest(@PathVariable String searchParam) {
+    @ApiOperation(
+            value = "Find airport by a search parameter",
+            notes = "You can search by city, airport code or even incomplete words",
+            response = Data.class)
+    public Data getAirportsByNameTest(@ApiParam(value = "Text that is going to be use to search for an airport")
+                                          @PathVariable String searchParam) {
         return airportService.getAirportsByParam(searchParam);
     }
 }
