@@ -2,10 +2,13 @@ package com.example.flight.controllers;
 
 import java.util.List;
 
+import com.example.flight.domains.Data;
 import com.example.flight.entities.Airport;
 import com.example.flight.entities.Flight;
 import com.example.flight.services.AirportService;
 import com.example.flight.services.FlightService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -67,5 +70,15 @@ class AirportController {
     @DeleteMapping("/flights/{id}")
     public void deleteFlight(@PathVariable Long id) {
         flightService.deleteFlight(id);
+    }
+
+    @GetMapping("/flightAPI/{searchParam}")
+    @ApiOperation(
+            value = "Find airport by a search parameter",
+            notes = "You can search by city, airport code or even incomplete words",
+            response = Data.class)
+    public Data getAirportsByNameTest(@ApiParam(value = "Text that is going to be use to search for an airport")
+                                          @PathVariable String searchParam) {
+        return airportService.getAirportsByParam(searchParam);
     }
 }
