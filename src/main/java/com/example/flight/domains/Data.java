@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @lombok.Data
 @NoArgsConstructor
-@ApiModel(description = "Domains to model the data that is received form the FlightAPI")
+@ApiModel(description = "Domain to model the data that is received from the FlightAPI")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Data {
     @ApiModelProperty(notes = "Array of airports")
